@@ -1,0 +1,138 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainer.cshtml";
+}
+
+@using Capstone.Web.Models
+@model Trainer
+
+
+
+<br />
+<br />
+<div class="jumbotron trainer-back">
+    <div class="row edit-header">
+
+        <div class="col-md-6 no-pad-left">
+            <h2 class="edit-text text-left">Edit Your Profile</h2>
+        </div>
+        <div class="col-md-6 text-right">
+            
+                <form action="/Trainer/ChangeAccess" method="get">
+                    @if (Model.Searchable)
+                     {
+                    <button class="btn btn-searchable btn-1 btn-1c" name="access" value="false">Make Profile Private</button>
+                     }
+            else if (!Model.Searchable)
+            {
+                <button class="btn btn-searchable btn-1 btn-1c" name="access" value="true">Make Profile Public</button>
+            }
+                </form>
+        </div>
+    </div>
+        <div class="container-profile">
+            <form action="/Trainer/SuccessfulEdit" method="get">
+                <div class="innerwrap">
+                    <section class="section1 clearfix">
+                        <div>
+                            <div class="row grid clearfix">
+                                <div class="col2 first">
+                                    <div class="col-md-12">
+                                        <img src="~/Content/img/workout-profile.jpg" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3>@Model.First_Name @Model.Last_Name</h3>
+                                        <h3 class="light-p">Exercise Philosophy</h3>
+                                        <p>
+                                            <div class="field-wrap input-sml input-philo">
+                                                <input class="input-sml" type="text" name="exercise_Philosophy" value="@Model.exercise_Philosophy" autocomplete="off" />
+                                            </div>
+                                        </p>
+                                        <span>@(Model.Searchable == true ? "public" : "private")</span>
+                                    </div>
+                                </div>
+                                <div class="col2 last">
+                                    <div class="grid clearfix">
+                                        <div class="col3 first">
+                                            <div class="field-wrap input-sml">
+                                                <input class="input-sml" type="number" min="0" name="Price_Per_Hour" value="@Model.Price_Per_Hour" autocomplete="off" />
+                                            </div>
+                                            <span>Price Per Hour</span>
+                                        </div>
+                                        <div class="col3">
+                                            <div class="field-wrap input-sml">
+                                                <input class="input-sml" type="number" min="0" max="80" name="experience" value="@Model.experience" autocomplete="off" />
+                                            </div>
+                                            <span>Years Experience</span>
+                                        </div>
+                                        <div class="col3 last">
+                                            <h1>@Model.Rating</h1>
+                                            <span>Rating</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+
+                            </div>
+                        </div>
+                        <span class="smalltri">
+
+                            <i class="fa fa-star"></i>
+                        </span>
+                    </section>
+                    <section class="section2 clearfix">
+                        <div class="grid">
+                            <div class="col3 first">
+                                <div class="postcont">
+                                    <h3>Certifications</h3>
+                                </div>
+                                <div class="profileinfo">
+                                    <p>
+                                        <div class="field-wrap">
+                                            <textarea class="form-control" name="Certifications" id="Certifications" rows="3">@Model.Certifications</textarea>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col3 center">
+                                <div class="postcont">
+                                </div>
+                                <div class="profileinfo">
+                                    <img src="~/Content/img/workout-profile.jpg" alt="">
+                                    <h3>Zip Code</h3>
+                                        <div class="field-wrap input-sml">
+                                            <input class="input-sml" type="number" name="user_location" value="@Model.User_Location" autocomplete="off" />
+                                        </div>
+                                    <p>
+                                        <div class="field-wrap">
+                                            <textarea class="form-control" name="Additional_notes" id="Additional_notes" rows="3">@Model.Additional_notes</textarea>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col3 last">
+                                <div class="postcont">
+                                    <h3>Success Stories</h3>
+                                </div>
+                                <div class="profileinfo">
+                                    <p>
+                                        <div class="field-wrap">
+                                            <textarea class="form-control" name="Client_Success_Stories" id="client_success_stories" rows="3">@Model.Client_Success_Stories</textarea>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="row edit-header">
+                    <button type="submit" class="btn btn-searchable btn-1 btn-1c">Update Profile</button>
+                    <button class="btn btn-red btn-1 btn-1c"><a href="@Url.Action("Index", "Trainer")">Cancel</a></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+

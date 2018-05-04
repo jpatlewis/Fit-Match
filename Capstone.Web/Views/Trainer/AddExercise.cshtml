@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainer.cshtml";
+}
+
+<div class="jumbotron search-back">
+    @if (TempData["AddExercise"] != null)
+     {
+        if ((bool)TempData["AddExercise"] == true)
+        {
+            <div class="alert alert-success" role="alert">Successfully Added the Exercise</div>
+        }
+        else if ((bool)TempData["AddExercise"] == false)
+        {
+            <div class="alert alert-danger" role="alert">Failed to Add the Exercise</div>
+        }
+     }
+
+    @if(TempData["Not-a-valid-link"] != null)
+     {
+            <div class="alert alert-danger" role="alert">@TempData["Not-a-valid-link"]</div>
+     }
+
+    <div class="container">
+
+        <h2>Add An Exercise</h2>
+        <br />
+        <form action="/Trainer/SubmitExercise" method="post" class="form-add">
+            <div id="add-exercise">
+                <div class="row">
+
+                    <i class="fas fa-id-card-alt"></i>
+
+                    <div class="col-md-4">
+                        <div class="field-wrap">
+                            <label>
+                                Exercise Name
+                            </label>
+                            <textarea class="form-control" name="Name" id="Name" rows="1" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <i class="fas fa-align-justify"></i>
+                    <div class="col-md-11">
+                        <div class="field-wrap">
+                            <label class="md-label">
+                                Description
+                            </label>
+                            <textarea class="form-control" name="Description" id="Description" rows="2" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <i class="fab fa-youtube"></i>
+                    <div class="col-md-11">
+                        <div class="field-wrap">
+                            <label>
+                                Youtube Link
+                            </label>
+                            <input class="form-control" name="VideoLink" id="VideoLink" type="text" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="field-wrap" id="add-radio">
+                        <h3>Type of Exercise</h3>
+                        <br />
+                        <div class="btn-group" data-toggle="buttons">
+                            <label>
+                                @Html.RadioButton("type", "2", new { @class = "radio-type" })<span></span>Strength
+                            </label>
+                            <br />
+                            <label>
+                                @Html.RadioButton("type", "1", new { @checked = true, @class = "radio-type" }) <span></span> Cardio
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div id="add-exercise">
+            <br />
+            <button type="submit" class="button button-block">Add Exercise</button>
+        </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $('.form-add').find('input, textarea').on('keyup blur focus', function (e) {
+
+        var $this = $(this),
+            label = $this.prev('label');
+
+        if (e.type === 'keyup') {
+            if ($this.val() === '') {
+                label.removeClass('active highlight');
+            } else {
+                label.addClass('active highlight');
+            }
+        } else if (e.type === 'blur') {
+            if ($this.val() === '') {
+                label.removeClass('active highlight');
+            } else {
+                label.removeClass('highlight');
+            }
+        } else if (e.type === 'focus') {
+
+            if ($this.val() === '') {
+                label.removeClass('highlight');
+            }
+            else if ($this.val() !== '') {
+                label.addClass('highlight');
+            }
+        }
+
+    });
+
+
+</script>

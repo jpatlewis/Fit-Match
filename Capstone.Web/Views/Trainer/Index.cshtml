@@ -1,0 +1,112 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainer.cshtml";
+}
+
+
+
+@using Capstone.Web.Models
+@model Trainer
+
+<br />
+<br />
+<div class="jumbotron trainer-back">
+    @if (Session[SessionKeys.Email] == null)
+    {
+        <h2 class="white-text">Welcome!</h2>
+       
+    }
+    else
+    {
+        <h2 class="white-text">Welcome @((string)Session[SessionKeys.First_Name]) @((string)Session[SessionKeys.Last_Name])!</h2>
+    }
+    <div class="container-profile">
+        <div class="innerwrap">
+            <section class="section1 clearfix">
+                <div>
+                    <div class="row grid clearfix">
+                        <div class="col2 first">
+                            <div class="col-md-12">
+                                <img src="~/Content/img/workout-profile.jpg" />
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-philo">
+                                    <h3>@Model.First_Name @Model.Last_Name</h3>
+                                    <h4 class="light-p">Exercise Philosophy</h4>
+                                    <p>@Model.exercise_Philosophy</p>
+                                    <span>@(Model.Searchable == true ? "public" : "private")</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2 last">
+                            <div class="grid clearfix">
+                                <div class="col3 first">
+                                    <h1>$@Model.Price_Per_Hour</h1>
+                                    <span>Price Per Hour</span>
+                                </div>
+                                <div class="col3">
+                                    <h1>@Model.experience</h1>
+                                    <span>Years Experience</span>
+                                </div>
+                                <div class="col3 last">
+                                    <h1>@Model.ClientList.Count</h1>
+                                    <span>Clients</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+
+                    </div>
+                </div>
+                <span class="smalltri">
+
+                    <i class="fa fa-star"></i>
+                </span>
+            </section>
+            <section class="section2 clearfix">
+                <div class="grid">
+                    <div class="col3 first">
+                        <div class="postcont">
+                            <h3>Certifications</h3>
+                        </div>
+                        <div class="profileinfo">
+                            <p>@Model.Certifications</p>
+                        </div>
+                    </div>
+                    <div class="col3 center">
+                        <div class="postcont">
+                        </div>
+                        <div class="profileinfo">
+                            <img src="~/Content/img/workout-profile.jpg" alt="">
+                            <h3>@Model.User_Location</h3>
+                            <div class="text-center">
+                                <p>@Model.Additional_notes</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col3 last">
+                        <div class="postcont">
+                            <h3>Success Stories</h3>
+                        </div>
+                        <div class="profileinfo">
+                            <p>@Model.Client_Success_Stories</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <a href="@Url.Action("EditTrainer", "Trainer")"><button class="btn btn-searchable btn-1 btn-1c">Edit Profile</button></a>
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainer.cshtml";
+}
+
+@using Capstone.Web.Models
+@model TrainerClients
+
+<div class="jumbotron search-back">
+    <div class="container" id="create-plan">
+        @if(Model.ClientsWithPlans.Count > 0)
+        {
+            <h2>Modify plan</h2>
+            <form action="/Trainer/Workouts" method="post">
+                <select class="form-control btn btn-secondary dropdown-toggle dropdown" id="clientselect" name="planId" required>
+                    <option name="ForTrainee" id="ForTrainee" value="">Select Client</option>
+                    @foreach (User item in Model.ClientsWithPlans)
+                    {
+                        <option name="planId" id="ForTrainee" value=@item.PlanId>@item.First_Name @item.Last_Name</option>
+                    }
+                </select>
+                <br />
+                <br />
+                <button type="submit" class="button-huge button-block">Modify Plan</button>
+            </form>
+            <br />
+            <br />
+        }
+        
+        <h2>Create a new plan for a client</h2>
+        <br />
+        <form action="/Trainer/CreatePlan" method="post">
+            <div class="form-group">
+                <label for="clientselect">Select Client to Add to Plan</label>
+                <select class="form-control btn btn-secondary dropdown-toggle dropdown" id="clientselect" name="ForTrainee" required>
+                    @foreach (User item in Model.ClientsWithoutPlans)
+                    {
+                        <option name="ForTrainee" id="ForTrainee" value=@item.User_ID>@item.First_Name @item.Last_Name</option>
+                    }
+                    <option name="ForTrainee" id="ForTrainee" disabled>There are no clients without plans.</option>
+                </select>
+            </div>
+            <div class="field-wrap">
+                <label class="lrg-label">
+                    Plan Name
+                </label>
+                <input type="text" class="form-control" name="planName" id="planName" required>
+            </div>
+
+            <div class="field-wrap">
+                <label class="lrg-label">
+                    Notes
+                </label>
+                <textarea class="form-control" name="Notes" id="Notes" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="button-huge button-block">Create Plan</button>
+        </form>
+        </div>
+    </div>
+
+        @*<h1>Edit a plan for a client</h1>
+            <form action="//" method="post">
+                <select name="ForTrainee">
+                    @foreach (User item in Model)
+                     {
+                        <option name="ForTrainee" id="ForTrainee" value=@item.User_ID>@item.First_Name @item.Last_Name</option>
+                     }
+                </select>
+                <div class="field-wrap">
+                    <label class="lrg-label">
+                        Plan Name
+                    </label>
+                    <textarea class="form-control" name="planName" id="planName" rows="3"></textarea>
+                </div>
+
+                <div class="field-wrap">
+                    <label class="lrg-label">
+                        Notes
+                    </label>
+                    <textarea class="form-control" name="Notes" id="Notes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="button button-block">Create Plan</button>
+            </form>*@

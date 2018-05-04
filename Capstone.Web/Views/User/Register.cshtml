@@ -1,0 +1,168 @@
+<!--Registration Script-->
+<script src="~/Scripts/registration.js"></script>
+
+@using Capstone.Web.Models.ViewModel
+@model RegisterViewModel
+
+<div id="registration">
+    <div class="form">
+
+        <div id="signup">
+            <h1>Register Now</h1>
+
+            <form action="/User/Register" method="post" autocomplete="off">
+
+                <div class="top-row">
+                    <div class="field-wrap">
+                        <label>
+                            First Name -<span class="req">*</span>
+                        </label>
+                        <input type="text" name="First_Name" required autocomplete="off" />
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Last Name - <span class="req">*</span>
+                        </label>
+                        <input type="text" name="Last_Name" required autocomplete="off" />
+                    </div>
+                </div>
+
+                <h4 style="color:lawngreen;">@Html.ValidationMessage("username - exists")</h4>
+                <div class="field-wrap">
+                    <label>
+                        Email - <span class="req">*</span>
+                    </label>
+                    <input type="email" name="Email" required autocomplete="off" />
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Zip Code -<span class="req">*</span>
+                    </label>
+                    <input type="number" name="User_Location" pattern=".{4,6}" required autocomplete="off"/>
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Set A Password -<span class="req">*</span>
+                    </label>
+                    <input type="password" name="Password" required autocomplete="off" />
+                </div>
+                <h4 style="color:lawngreen;">@Html.ValidationMessage("passwords - don't match")</h4>
+                <div class="field-wrap">
+                    <label>
+                        Confirm Password<span class="req">*</span>
+                    </label>
+                    <input type="password" name="ConfirmPassword" required autocomplete="off" />
+                </div>
+
+                <div class="field-wrap">
+                    <div class="row">
+                        <div class="col-sm-1 col-md-1 col-lg-1 padd-R-0">
+                            <input class="checkbox" type="checkbox" value="true" name="is_trainer" data-toggle="collapse" href="#is-trainer-active" role="button" aria-expanded="false" aria-controls="collapseExample" />
+                        </div>
+                        <div class="col-sm-10 col-md-10 col-lg-10 padd-LR-0">
+                            <span class="checkbox-label">Register as a Trainer?</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="field-wrap">
+                    <div class="row">
+                        <div class="collapse card-body" id="is-trainer-active">
+                            <div class="card card-body card-dark">
+                                <div class="top-row">
+                                    <div class="field-wrap">
+                                        <label>
+                                            <span class="req">$</span>Price Per Hour
+                                        </label>
+                                        <input type="number" min="1" name="PricePerHour" autocomplete="off" />
+                                    </div>
+
+
+                                    <div class="field-wrap">
+                                        <label>
+                                            Years of Experience
+                                        </label>
+                                        <input type="number" min="0" max="80" textarea class="form-control" name="YearsExp" id="experience" rows="3">
+
+                                    </div>
+                                </div>
+                                <div class="field-wrap">
+                                    <label>
+                                        Certification
+                                    </label>
+                                    <input type="text" id="Certifications" name="Certifications" autocomplete="off" />
+                                </div>
+                                <div class="field-wrap">
+                                    <label class="lrg-label">
+                                        Client Success Stories
+                                    </label>
+                                    <textarea class="form-control" name="ClientSuccessStories" id="client_success_stories" rows="3"></textarea>
+                                </div>
+                                <div class="field-wrap">
+                                    <label class="lrg-label">
+                                        Exercise Philosophy
+                                    </label>
+                                    <textarea class="form-control" name="Philosophy" id="exercise_philosophy" rows="3"></textarea>
+                                </div>
+                                <div class="field-wrap">
+                                    <label class="x-lrg-label">
+                                        Other Notes
+                                    </label>
+                                    <textarea class="form-control" name="Additional_notes" id="additional_notes" rows="5"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <button type="submit" class="button button-block">Get Started</button>
+
+            </form>
+
+        </div>
+
+
+    </div> <!-- /form -->
+
+</div>
+
+<script>
+    $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+        var $this = $(this),
+            label = $this.prev('label');
+
+        if (e.type === 'keyup') {
+            if ($this.val() === '') {
+                label.removeClass('active highlight');
+            } else {
+                label.addClass('active highlight');
+            }
+        } else if (e.type === 'blur') {
+            if ($this.val() === '') {
+                label.removeClass('active highlight');
+            } else {
+                label.removeClass('highlight');
+            }
+        } else if (e.type === 'focus') {
+
+            if ($this.val() === '') {
+                label.removeClass('highlight');
+            }
+            else if ($this.val() !== '') {
+                label.addClass('highlight');
+            }
+        }
+
+    });
+
+
+</script>
+

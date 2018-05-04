@@ -1,0 +1,52 @@
+﻿
+@{
+    if(Session[SessionKeys.Trainer_ID] == null)
+    {
+        Layout = "~/Views/Shared/_LayoutTrainee.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutTrainer.cshtml";
+    }
+
+}
+
+@using Capstone.Web.Models
+
+@model Exercise
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div class="detail-back jumbotron">
+        <div class="container">
+
+            <h2>@Model.Name</h2>
+            <br />
+            <div class="card video-card">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="card-img-top embed-responsive-item" height="315" src="@Model.VideoLink" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">@Model.Description</p>
+                    @if(Session[SessionKeys.Trainer_ID] == null)
+                    {
+                    <a href="@Url.Action("Index", "Trainee")" class="btn btn-primary btn-back">Return to Plan</a>
+                    }
+                    else
+                    {
+                    <a href="@Url.Action("Index", "Trainer")" class="btn btn-primary btn-back">Return to Plan</a>
+                    }
+                    
+                </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

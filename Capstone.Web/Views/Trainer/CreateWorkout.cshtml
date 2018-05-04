@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainer.cshtml";
+}
+
+@using Capstone.Web.Models
+@model Plan
+
+<div class="jumbotron search-back">
+    <div class="container" id="create-plan">
+        <h2>Edit Workouts in Plan: <b>@Model.PlanName</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="card-body">
+                    <div class="card-header card-subheader">
+                        <h3>Workouts Currently in Plan</h3>
+                    </div>
+                    <div class="card">
+                        <div class="workout-exercise">
+
+                            <ul class="list-group list-group-flush">
+                                
+                                @foreach (Workout item in Model.SeveralWorkouts)
+                                 {
+                            <li class="list-group-item">
+
+                                <span class="badge badge-primary badge-workout"><a href="@("/Trainer/AddExercisesToWorkout?planId=" + item.Plan_Id + "&workoutId=" + item.Id)">Edit</a></span>
+                                <div class="workout-name">@item.Name</div>
+                                @*<a href="@("/Trainer/AddExercisesToWorkout?planId=" + item.Plan_Id + "&workoutId=" + item.Id)">@item.Name</a>*@
+                            </li>
+                                 }
+                            </ul>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="card-header card-subheader add-new">
+                    <h3 class="white">Add New Workout to Plan</h3>
+                    </div>
+                    <form action="/Trainer/CreateWorkout" method="post">
+                        <div class="field-wrap">
+                            <label class="lrg-label">
+                                Workout Name
+                            </label>
+                            <input type="text" class="form-control" name="Name" id="Name" required>
+                            <input type="hidden" value="@Model.Id" class="form-control" name="planID" id="planID">
+                        </div>
+
+                        <div class="field-wrap">
+                            <label class="lrg-label">
+                                Notes
+                            </label>
+                            <textarea class="form-control" name="Notes" id="Notes" required rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="button btn-update button-block">Create Workout</button>
+                    </form>
+
+                </div>
+            </div>
+
+        <br />
+        <h4 class="text-center">Here you can view your current workouts associated with this plan, as well as add additional workouts to the clients plan. If you would like to edit the specific details of an exercise included in a workout, simply click the edit button next to the workout you would like to change.</h4>       
+    </div>
+</div>

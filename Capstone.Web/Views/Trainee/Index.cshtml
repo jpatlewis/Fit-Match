@@ -1,0 +1,119 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainee.cshtml";
+}
+
+@using Capstone.Web.Models
+@model Plan
+
+@if (Session[SessionKeys.Email] == null)
+{
+    <br />
+    <h2>Welcome!</h2>
+    <br />
+}
+else
+{
+    <br />
+    <h2>Welcome @((string)Session[SessionKeys.First_Name]) @((string)Session[SessionKeys.Last_Name])!</h2>
+    <br />
+}
+
+<div class="jumbotron dark-back">
+    @if(Model == null)
+    {
+        <h2 class="white">No workout plan yet</h2>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="plan-header">@Model.PlanName</h1>
+            </div>
+            <div class="col-md-6">
+                <a href="@("/Trainee/TrainerProfile/" + Model.ByTrainer)" class="btn btn-trainer btn-1 btn-1c">Trainer : @Model.TrainerName</a>
+            </div>
+        </div>
+        <div id="accordion">
+        @{
+            int counter = 1;
+        }
+        @foreach (Workout workout in Model.SeveralWorkouts)
+        {
+            <div class="card">
+                <div class="card-header" id="@("heading" + counter)">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="@("#collapse" + counter)" aria-expanded="false" aria-controls="collapseOne">
+                            @workout.Name
+                        </button>
+                    </h5>
+                </div>
+                <div id="@("collapse" + counter)" class="collapse" aria-labelledby="@("heading" + counter)" data-parent="#accordion">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card-body">
+                                @if (workout.RunningAndStuff.Count > 0)
+                                {                           
+                                    <div class="card-header card-subheader">
+                                        <h3>Cardio</h3>
+                                    </div>
+                                    foreach (CardioExercise e in workout.RunningAndStuff)
+                                    {
+                                    <div class="card">
+                                        <div class="workout-exercise">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <span class="badge badge-primary badge-exercise"><a href="@("/Trainer/Detail/" + e.ExerciseID)">@e.Name</a></span>
+                                                                            <i class="far fa-clock exercise-icon"></i><span class="duration"><b>Time: </b>@e.Duration</span>
+                                                                            <i class="far fa-heart exercise-icon"></i><span class="intensity"><b>Intensity: </b>@e.Intensity</span>
+                                                </li>
+                                            </ul>     
+                                        </div>
+                                    </div>
+                                    <br />
+                                    }
+                                }
+
+                                @if (workout.GetBig.Count > 0)
+                                {
+                                    <div class="card-header card-subheader">
+                                        <h3>Strength</h3>
+                                    </div>
+                                        
+                                    foreach (StrengthExercise e in workout.GetBig)
+                                    {
+                                        <div class="card">
+                                            <div class="workout-exercise">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <span class="badge badge-primary badge-exercise"><a href="@("/Trainer/Detail/" + e.ExerciseID)">@e.Name</a></span>
+                                                        <i class="far fa-hourglass exercise-icon"></i><span class="sets"><b>Sets: </b>@e.Sets</span>
+                                                        <i class="far fa-hand-rock exercise-icon"></i><span class="reps"><b>Reps: </b>@e.Reps</span>
+                                                        <i class="far fa-clock exercise-icon"></i><span class="rest-time"><b>Time Between Sets: </b>@e.Rest_time</span>
+                                                    </li>
+                                                </ul>         
+                                            </div>
+                                            </div>
+                                    }
+                                }
+                                </div>
+                            </div>
+                        <div class="col-lg-6">
+                            <div class="card-body">
+                                <div class="card">
+                                    <div class="card-header card-subheader">
+                                        <h3>Notes</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="workout-notes">@workout.Notes</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            counter++;
+        }
+    </div>
+    }
+</div> <!--End Jumbotron-->

@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainee.cshtml";
+}
+
+@using Capstone.Web.Models
+@model Trainer
+
+@if (TempData["IsMatched"] != null)
+{
+    if ((bool)TempData["IsMatched"] == true)
+    {
+        <div class="alert alert-success" role="alert">Successfully matched with trainer</div>
+    }
+    else if ((bool)TempData["IsMatched"] == false)
+    {
+        <div class="alert alert-danger" role="alert">Failed to match with trainer</div>
+    }
+}
+
+<div class="jumbotron search-back">
+    <div class="container-profile">
+        <div class="innerwrap">
+            <section class="section1 clearfix">
+                <div>
+                    <div class="row grid clearfix">
+                        <div class="col2 first">
+                            <div class="col-md-12">
+                                <img src="~/Content/img/workout-profile.jpg" />
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-philo">
+                                    <h4 class="light-p">Exercise Philosophy</h4>
+                                    <p>@Model.exercise_Philosophy</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col2 last">
+                            <div class="grid clearfix">
+                                <div class="col3 first">
+                                    <h1>$@Model.Price_Per_Hour</h1>
+                                    <span>Price Per Hour</span>
+                                </div>
+                                <div class="col3">
+                                    <h1>@Model.experience</h1>
+                                    <span>Years Experience</span>
+                                </div>
+                                <div class="col3 last">
+                                    <h1>@Model.ClientList.Count</h1>
+                                    <span>Clients</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+
+                    </div>
+                </div>
+                <span class="smalltri">
+
+                    <i class="fa fa-star"></i>
+                </span>
+            </section>
+            <section class="section2 clearfix">
+                <div class="grid">
+                    <div class="col3 first">
+                        <div class="postcont">
+                            <h3>Certifications</h3>
+                        </div>
+                        <div class="profileinfo">
+                            <p>@Model.Certifications</p>
+                        </div>
+                    </div>
+                    <div class="col3 center">
+                        <div class="postcont">
+                        </div>
+                        <div class="profileinfo">
+                            <img src="~/Content/img/workout-profile.jpg" alt="">
+                            <h3>@Model.User_Location</h3>
+                            <div class="text-center">
+                                <p>@Model.Additional_notes</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col3 last">
+                        <div class="postcont">
+                            <h3>Success Stories</h3>
+                        </div>
+                        <div class="profileinfo">
+                            <p>@Model.Client_Success_Stories</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            @if (TempData["IsMatched"] == null || (TempData["IsMatched"] != null && (bool)TempData["IsMatched"] == false))
+            {
+                <div class="text-center">
+                    <input type="button" class="btn button-huge button-block" value="Register With Trainer" onclick="location.href='@Url.Action("MatchTrainer", "Trainee", new { id = Model.Trainer_ID })'" />
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+

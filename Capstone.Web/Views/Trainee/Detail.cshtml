@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutTrainee.cshtml";
+}
+
+@using Capstone.Web.Models
+
+@model Exercise
+
+@using Capstone.Web.Models
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div class="search-back jumbotron">
+        <div class="about-paragraph">
+            @Model.Name
+        </div>
+        <div class="text-center">
+            <div class="about-text">
+                <span class='about-paragraph'>
+                    Description: @Model.Description
+                </span>
+            </div>
+
+        </div>
+        <div>
+            <iframe width="560" height="315" src="@Model.VideoLink" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+</body>
+</html>

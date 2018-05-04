@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutTrainee.cshtml";
+}
+
+
+<div class="jumbotron search-back">
+    
+    <div class="container">
+        <h2>Search For A Trainer</h2>
+        <br />
+        <div>@Model</div>
+        @*<form action="/Trainee/SearchResult" method="get">*@
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-md-6 col-lg-7">
+                <label class="dropdown-label">Search Type</label>
+                <select name="SearchType" id="SearchTypeID" class="dropdown-box input-margin">
+                    <option selected="selected" value="name">Name</option>
+                    <option selected="selected" value="price">Price Per Hour</option>
+                    <option selected="selected" value="location">Zip Code</option>
+                </select>
+                <input type="number" id="searchString" name="SearchString" class="search-input input-margin" />
+            </div>
+            <div class="col-lg-4">
+                <button class="button-block button-thin search-btn" name="searchButton">Search</button>
+            </div>
+        </div>
+    </div>
+        @*</form>*@
+
+    <div class="container">
+        @*<figure class="resultcard">
+            <figcaption>
+                <h3>Trainer Name</h3>
+                <h4>Location</h4>
+                <p>Something Else</p>
+                <div class="icons">
+                </div>
+            </figcaption>
+        </figure>*@
+
+        <table class="table table-striped table-dark result-table">
+            <thead class="thead-dark thead-blue">
+                <tr>
+                    <th></th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email Address</th>
+                    <th scope="col">Price Per Hour</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Profile</th>
+                </tr>
+            </thead>
+            <tbody id="searchTable"></tbody>
+        </table>
+    </div>
+
+    </div>
+

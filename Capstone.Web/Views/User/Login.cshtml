@@ -1,0 +1,63 @@
+    <div id="login">
+        <div class="form">
+
+                <div id="login">
+                    <h1>Welcome Back!</h1>
+                    <h4 style="color:lawngreen">@Html.ValidationMessage("invalid credentials")</h4>
+                    <form action="/User/Login" method="post">
+
+                        <div class="field-wrap">
+                            <label>
+                                Email Address<span class="req">*</span>
+                            </label>
+                            <input type="email" name="email" required autocomplete="off" />
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Password<span class="req">*</span>
+                            </label>
+                            <input type="password" name="password" required autocomplete="off" />
+                        </div>
+
+
+                        <button class="button button-block" >Log In</button>
+
+                    </form>
+
+                </div>
+
+        </div> <!-- /form -->
+
+    </div>
+    <script>
+    $('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+        var $this = $(this),
+            label = $this.prev('label');
+
+        if (e.type === 'keyup') {
+            if ($this.val() === '') {
+                label.removeClass('active highlight');
+            } else {
+                label.addClass('active highlight');
+            }
+        } else if (e.type === 'blur') {
+            if ($this.val() === '') {
+                label.removeClass('active highlight');
+            } else {
+                label.removeClass('highlight');
+            }
+        } else if (e.type === 'focus') {
+
+            if ($this.val() === '') {
+                label.removeClass('highlight');
+            }
+            else if ($this.val() !== '') {
+                label.addClass('highlight');
+            }
+        }
+
+    });
+
+    </script>
