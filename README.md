@@ -1,5 +1,3 @@
-# Final Capstone
-
 ## What Projects Are Included w/Repository
 
 - **Capstone.Web** - ASP.NET MVC Project
